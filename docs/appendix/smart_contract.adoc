@@ -1,0 +1,8 @@
+[appendix]
+Smart Contract
+--------------
+
+```
+include::../../smart-contract/contracts/Lottery.sol[]
+
+```

@@ -1,0 +1,20 @@
+== Methodik
+Um einen sicheren Zufallszahlgenerator entwerfen zu können, wird ich im Verlauf meiner Semesterarbeit
+folgende Phasen durchlaufen.
+
+__Phase 1 - Technische Grundlagen__ +
+Um ein Grundsätzliches Verständnis für Blockchain und Smart Contract herzustellen,
+werden die technische Grundlagen durchleuchtet und beschrieben. Dies dient als Basis für das weitere Vorgehen.
+
+__Phase 2 - Lotterielos Spielprinzip verstehen__ +
+Sich mit dem Spielprinzip und rechtlichen Grundlagen vom Lotterielos auseinandersetzen.
+
+__Phase 3 - Entwicklungsumgebung aufbauen__ +
+Aufbau einer lokalen Umgebung um den Smart Contract entwickeln und testen zu können.
+
+__Phase 4 - Programmiersprache erlernen__ +
+Erlernen der Programmiersprache um den Smart Contract abzubilden zu können.
+
+__Phase 5 - Smart Contract__ +
+Den Smart Contract entwickeln und sich mit den Zufallszahlen auseinandersetzen
+

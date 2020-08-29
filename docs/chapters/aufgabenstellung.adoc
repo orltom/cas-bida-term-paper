@@ -1,0 +1,43 @@
+== Aufgabenstellung
+
+=== Ziele
+Folgende Tabelle enthält die Definitionen der Ziele welche in dieser Arbeit erreicht werden sollen.
+Dabei wird zwischen “Must” Zielen (ZM) und optionalen Zielen (ZO) unterschieden. Die optionalen Ziele
+werden verfolgt, falls gegen Ende der Arbeit noch genügend Zeit zur Verfügung steht.
+
+
+[cols="^1,10", options=""]
+|===
+
+| ZM1
+| Lotterielos Use Case als Smart Contract abbilden.
+
+| ZM2
+| Einschränkungen von Naiven Zufallszahlengenerator im Smart Contract Umfeld durchleuchtet.
+
+| ZO1
+| Einbindung von externen Oracle im Smart Contract
+
+|===
+Auf die Erreichung dieser Ziele und deren Bewertung wird am Ende dieser Arbeit nochmals eingegangen.
+Abgesehen von diesen messbaren Zielen wird sich der Autor fundiertes Wissen in Blockchain und Smart Contract
+aneignen und vertiefen.
+
+
+=== Abgrenzungen
+Um den Rahmen dieser Arbeit nicht zu sprengen, wird vor allem auf die Smart Contract Aspekte eingegangen.
+Dabei werden folgende, in der Tabelle aufgeführten, Aspekte explizit nicht durchleuchtet.
+Diese Punkte müssen gegebenenfalls in einer weiteren Arbeit analysiert werden.
+
+[cols="^1,10", options=""]
+|===
+
+| A1
+| Entwickeln oder Aufbau eines externen Zufallszahl Oracle.
+
+| A2
+| Authentisierung
+
+| A3
+| Entwickeln eines sicheren und optimalen Zufallszahl Generator.
+|===

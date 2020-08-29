@@ -1,0 +1,48 @@
+== Quellenverzeichnis
+
+- [[[bw]]] Satoshi Nakamoto [Oktober 2008]. Bitcoin: A Peer-to-Peer Electronic Cash System [Online] +
+Available: https://bitcoin.org/bitcoin.pdf
+
+- [[[szabo]]] Szabo [1997]. Formalizing and Securing Relationships on Public Networks. Internet economics and
+  Security.
+
+- [[[proof-of-work]]] Demelza Hays [2018]. Consensus Mechanisms [Online] +
+ Available: https://cryptoresearch.report/crypto-research/consensus-mechanisms/
+
+- [[[pos]]] James Ray [2018]. Proof of Stake FAQs [Online] +
+ Available: https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQs#what-is-proof-of-stake
+
+- [[[zufallszahlen]]] Philipp Frank [1932]. Zufallzahl
+
+- [[[sc]]] Smart contracts [Online] +
+Available: `https://en.bitcoin.it/wiki/Contracts`
+
+- [[[ew]]] Vitalik Buterin [2013]. Etherum White Paper [Online] +
+Available: https://github.com/ethereum/wiki/wiki/White-Paper
+
+- [[[hzz]]] Prof. Dr.-Ing. Norbert Reifschneider [2000]. Hardwareanalysator für Zufallszahlen [Online] +
+Available: https://www.hs-heilbronn.de/1837998/hardwareanalysator-fur-zufallszahlen
+
+- [[[crr]]] Demelza Kelso Hays, Mark J. Valek [2018]. Crypto Research Report [Online] +
+Available: https://cryptoresearch.report/wp-content/uploads/2018/06/Crypto-Research-Report-Juni-2018-3.pdf
+
+- Tobias Litte [2005], Zufallsgeneratoren [Online] +
+Available: https://perso.u-cergy.fr/~ahonecker/bs/semstat/ausarb/litte.pdf
+
+- Der Bundesrat [Dezember 2018] Rechtliche Grundlagen für Distributed Ledger-Technologie und Blockchain in der Schweiz [Online] +
+Available: https://www.newsd.admin.ch/newsd/message/attachments/55150.pdf
+
+- Andreas Rabe [2016]. Wie funktioniert ein Zufallsgenerator? [Online] +
+Available: https://addis-techblog.de/2016/01/wie-funktioniert-ein-zufallsgenerator
+
+- Prof. Dr.-Ing. Norbert Reifschneider [2000]. Softwareanalysator für Zufallszahlen [Online] +
+Available: https://www.hs-heilbronn.de/3175988/softwareanalysator-fuer-zufallszahlen
+
+- Austin Thomas Griffith [Dezember 2018]. Commit Reveal Scheme on Ethereum [Online] +
+Available: https://medium.com/gitcoin/commit-reveal-scheme-on-ethereum-25d1d1a25428
+
+- Krishnendu Chatterjee, Amir Kafshdar Goharshady, Arash Pourdamghani [Februar 2019]. Probabilistic Smart Contracts: Secure Randomness on the Blockchain
+Available: https://arxiv.org/pdf/1902.07986.pdf
+
+- Anand Paul Mooken [Mai 2017]. Die Blockchain Technologie: Eine Methode zur Identifikation von Anwendungsfällen
+Available: https://digitalcollection.zhaw.ch/bitstream/11475/7678/1/Mooken_Anand_W.MA.WIN.pdf

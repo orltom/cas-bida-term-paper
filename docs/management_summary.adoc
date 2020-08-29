@@ -1,0 +1,36 @@
+:doctype: book
+:pdf-style: without-page-number-theme.yml
+:pdf-stylesdir: themes
+:icons: font
+:stem:
+
+[abstract]
+Management Summary
+------------------
+In dieser Arbeit wurde eruiert, was das geeignetstes Verfahren ist um eine Zufallszahl in einem Smart Contract
+Umfeld zu generieren. Anhand eines Lotterielos Verfahren wurde diese Problemstellung untersucht.
+Ziel ist einen Zufallszahlengenerator zu entwerfen, dem es keinem Akteur ermöglicht, seine Chancen im Voraus zu berechnen.
+
+Während der Einarbeitung in diesem Thema wurden Schwierigkeiten identifiziert, dass das erstellen von Zufallszahlen erschweren.
+Zu den Hauptproblemen gehören: Smart Contracts Zustände sind für jedermann einsehbar und einbeziehen von externen Oracle
+sind begrenzt. Anhand einer Problemanalyse wurden drei Lösungsvarianten erarbeitet.
+
+__Variante A__ +
+Smart Contract bezieht die Zufälligkeit von einem externem Oracle Service Anbieter. Welches nicht unter der Kontrolle des Smart Contract
+Besitzer befindet.
+
+__Variante B__ +
+Die Input Quellen für den Zufallsgenerator sind Meta Daten von den Teilnehmern und einem zukünftigen generierten Block.
+
+__Variante C__ +
+In dieser Variante kommt die Zufälligkeit von den Teilnehmern und mit Hilfe vom Commitment-Verfahren werden diese
+Input Daten bis zur Ziehung geheim gehalten.
+
+__Empfehlung__ +
+Die Variante A bedingt ein grosses Vertrauen am externen Oracle Service Anbieter. Dieser kann den Spiel Verlauf kontrollieren.
+Aus diesem Grund scheidet diese Variante aus. Die Variante B und C scheinen valable Lösungen zu sein.
+Wobei in der Variante C geklärt werden muss, wie sich der Smart Contract verhalten soll, wenn ein Teilnehmer
+nicht bei der Aufdecken Phase teilnimmt. Schlimmstenfalls würde das Spiel sich in Tiefschlaf versetzen.
+Aus diesen Gründen empfiehlt der Autor die Variante B.
+
+

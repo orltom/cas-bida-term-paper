@@ -1,0 +1,8 @@
+[appendix]
+React JS Web Entry Point
+------------------------
+
+```
+include::../../web/src/components/App/index.js[]
+
+```

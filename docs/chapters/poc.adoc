@@ -1,0 +1,249 @@
+== Proof of Concept
+In den vorherigen Kapiteln wurden die Grundlagen vermittelt, um ein Grundverständnis für die Kern Themen dieser
+Semesterarbeit zu haben. Ziel ist es anhand eines Proof of Concept ein Lotterielos auf der Ethereum Platform zu entwickeln. Doch bevor mit
+der Umsetzung gestartet werden kann, müssen vorgängig zwei essentielle Aspekte vom Spiel durchleuchtet werden. Dies
+wäre zu einem der Zufallszahlgenerator und der Zeitbasierte Trigger. In den nachfolgenden Abschnitten werden die
+Schwierigkeiten und Problematik dieser Aspekte erläutert.
+
+Danach wird der mögliche Lösungsraum festgelegt und anschliessend eine praktische Umsetzung vorgestellt.
+
+=== Zufallszahlen
+Zufallszahlen haben in der Informatik einen wichtigen Stellenwert und sind in verschieden Anwendungen wieder zu finden.
+Zum Beispiel in Simulationen, Kryptographie oder probabilistische Algorithmen. Doch was sind Zufallszahlen,
+der österreichische Wissenschaftler Philipp Frank hat im Jahre 1932 folgende Erklärung dafür <<zufallszahlen>>.
+
+[,Philipp Frank]
+""
+Ein Zufall schlechthin, also gewissermaßen ein absoluter Zufall wäre dann ein
+Ereignis, das in Bezug auf alle Kausalgesetze ein Zufall ist, das also nirgends
+als Glied einer Kette auftritt.
+""
+
+Zur Erzeugung von Zufallszahlen gibt es verschiedene Verfahren, welche als Zufallszahlengeneratoren bezeichnet werden.
+Ein entscheidendes Kriterium für Zufallszahlen ist, ob das Ergebnis der Generierung als unabhängig von früheren
+Ergebnissen betrachtet werden kann oder nicht. Grundsätzlich unterscheidet man zwischen nicht-deterministischen und
+deterministischen Zufallszahlengeneratoren.
+Die nicht-deterministischen erzeugen sogenannt Echte Zufallszahlen und weisen eine optimale statistische Eigenschaft und haben
+keine Reproduzierbarkeit. Eingangs Quellen von solchen Zufallszahlen kommen in der Regel in der Natur vor. Einer der
+prominenteste ist die Rauschgrössenmessung. Ein deterministischer Zufallszahlengenerator liefert bei gleichen
+Ausgangsbedingungen dagegen immer die gleiche Folge von Zufallszahlen sogenannte Pseudozufallszahlen.
+
+Sofware orientierte Lösungen sind grundsätzlich deterministisch.
+Damit ein nicht-deterministischer Zufallszahlgenerator realisiert werden kann, muss zwingend eine externe Quelle
+einbezogen werden. Hierzu können zum Beispiel Impulsschwankungen elektrischer Schaltungen genutzt werden.
+
+In der Praxis werden häufig arithmetische Zufallszahlengeneratoren verwendet, welche eine Mischform darstellen.
+Sie liefern zwar Pseudozufallszahlen, nutzen aber als Startwert eine echte zufällige Zahl.
+Dies kann zum Beispiel die aktuelle Systemzeit oder Hardware-Ereignisse sein.
+
+Weil arithmetische Zufallszahlengeneratoren keine statistischen Auffälligkeiten vorweisen, werden Sie in Software
+Prozeduren oft verwendet.
+
+==== Softwaretechnische Realisierung
+Grundsätzlich existieren verschiedene Implementierungsmöglichkeiten um ein arithmetischer Zufallszahlengenerator
+abzubilden. Wobei diese sich in zwei Gruppen unterteilen lassen <<hzz>>:
+
+_Arithmetische Zufallszahlengenerator_ +
+[,Norbert Reifschneider]
+""
+Dieser basiert auf der Arithmetik. Irrationale Zahlen wie Wurzel oder e können als
+Zufallszahlengenerator verwendet werden, indem man den gebrochenen Teil beliebiger Vielfache als Zufallszahlen nutzt.
+Nachteil des Verfahrens ist, dass sich irrationale Zahlen nur als Näherungswerte innerhalb der Rechengenauigkeit
+darstellen lassen.
+""
+
+_Rekursiver arithmetischer Zufallszahlengenerator_ +
+[,Norbert Reifschneider]
+""
+Beruht auf der Berechnung einer neuen
+Zufallszahl aus einer oder mehreren vorhergehenden Zahlen. Die neu erzeugte Zahl wird gespeichert und geht
+bei erneutem Aufruf des Zufallszahlengenerators in die Berechnung ein. Beim allerersten Aufruf des
+Zufallszahlengenerators muss ein willkürlich gewählter Startwert, respektive Seed verwendet werden.
+""
+
+==== Einschränkungen
+Smart Contracts auf der Ethereum Platform sind deterministisch und laufen unabhängig voneinander auf verschieden
+Blockchain Nodes respektive Ethereum Virtual Machine (EVM). Wegen dem deterministischen Charakter eines Smart Contracts
+und Schwierigkeit eine nicht-deterministische Zufallszahl auf verteilten unabhängigen Nodes zu erzeugen.
+Sucht man in der Programmiersprache Solidity vergeblich nach einer Zufallszahl Funktion.
+Ausserdem ist es per se nicht möglich eine externe Quelle ausserhalb der Blockchain anzusprechen. Das bedeutet es
+ist nicht möglich ein HTTP Request auf eine Internet Ressource abzusetzen.
+
+<<<
+
+=== Zeitbasierender Trigger
+In Protokollen oder Log Dateien sind Zeitstempel wiederzufinden, sie dienen in der Regel als Meta Information. Doch
+in einem verteilten Netzwerk, dienen diese Daten unter anderem um chronologische Abläufe zu erkennen.
+Damit dies möglich ist, müssen alle Teilnehmer eines Computer Netzwerk die gleiche System Zeit verwenden.
+Weil aber die System Zeit bei einem Computer im Verlauf der Zeit eine Abweichung aufweist.
+Sollten Computer in einem Kommunikationsnetzwerk ihre Systemzeit kontinuierlich justieren. Aus diesem Grund gleichen
+Computer ihre Systemzeit mit einem Network Time Protokoll Service aus dem Internet ab.
+
+Erstellen von Ethereum Blocks sind nicht abhängig von einem zeitlichen Intervall und das Ethereum Protokoll
+beschreibt nicht, wie sich Nodes respektive Miners ihre Zeit abgleichen.
+Miner müssen beim erstellen eines Blockes einen Zeitstempel setzen. Im Ethereum Whitepaper findet man für den
+Zeitstempel nur folgendes Kriterium <<ew>>
+
+[quote,Vitalik Buterin, Ethereum Whitepaper]
+""
+Check that the timestamp of the block is greater than that of the previous block and less
+than 2 hours into the future
+""
+
+Aktionen die einen Smart Contract Zustand verändern, benötigen eine Blockchain Transaktion und werden in einem
+Blockchain Block abgebildet. Weil die Blockchain per se Single Thread ist und Transaktionen nacheinander
+abgearbeitet werden, bedeutet, dass das die Blockchain Block Generierung die Intervalle der möglichen Smart Contract
+Aktivitäten bestimmt.
+
+Smart Contracts basierend auf der Ethereum Plattform werden von externen Event getriggert. Was wiederum bedeutet, dass Smart Contract
+nicht ein Computer Prozess ist, welches von selbst aus aufwacht und eine Zustandsveränderung respektive Transaktion auslöst.
+Es agiert nur wenn ein Akteur ein Smart Contract Funktion aufruft. Aus diesem Grund findet man auf der Ethereum Plattform
+keine Funktionalität die einen Zeitintervall abbildet.
+
+=== Schlussfolgerung
+Grundsätzlich ist ein Smart Contract deterministisch und der dahinterliegende Code auf der Blockchain für jedermann einsehbar.
+Zusätzlich zu dem, sind auch die Smart Contract Zustände ablesbar. Damit ein Lotterie Teilnehmer nicht seine Chancen im
+Voraus berechnen kann, muss der Zufallszahlgenerator einen Input Wert verwenden welches in der
+Zukunft liegt und nicht erraten werden kann oder Werte müssen verschlüsselt auf der Blockchain liegen.
+
+Smart Contract sind keine ewig laufende Prozesse, sie werden von extern getriggert. Aus diesem Grund
+muss ein Akteur die effektive Ziehung explizit oder implizit triggern. Wichtig zu verstehen ist, dass der Zeitintervall vom Block Generierung
+respektive von den Miners definiert werden. Ausserdem sind die Zeit Intervalle in der Regel nie gleich lang.
+
+Zeitorientierte Meta Daten aus der Blockchain sind keine garantierte zuverlässige Input Quellen für den Zufallsgenerator.
+Denn gemäss Ethereum gibt es kein klare Definition wie die Nodes ihre Systemzeit synchronisieren sollten.
+
+Jetzt stellt sich die Frage was für Input Quellen und Verfahren könnte man verwenden um eine Zufallszahlgenerator zu entwickeln. In
+dieser Semesterarbeit wurde einige Ideen gesammelt, aber weil es den Rahmen dieser Arbeit sprengen würde, kann nicht jede
+Lösung in Detail eingegangen werden.
+
+=== Lösungsraum
+Es wurden drei mögliche Lösungsvarianten eruiert, wobei dies nicht unter einer detaillierten Risiko Analyse unterzogen
+wurden.
+
+==== L1 - Externer Oracle und externem Zeit Trigger
+Weil es offensichtlich nicht trivial ist eine sichere Zufallszahl auf der Ethereum Platform zu erzeugen
+und ein Applikation bei einem bestimmten Zeitpunkt zu triggern. Kamen findige Entwickler auf die Idee einen
+kostenpflichtigen Service für diese Problemstellung zu entwickeln.
+Der prominenteste unter den Zufallszahl Service Provider ist Provable. Dieser ermöglicht einem Quellen von Zufallszahlen
+ausserhalb der Blockchain zu beziehen. Dies bedingt aber das ein Smart Contract auf Basis der Provable erstellt wird,
+welches vom Lotterielos Smart Contract getriggert wird. +
+Damit man Aktionen triggern kann, welche in der Zukunft liegen, wie zum Beispiel die Lotterielos Ziehung, könnte
+man die Alarm Clock Service verwenden. Dieser Triggert den Smart Contract anhand der Blockchain Block Zähler.
+
+[cols="^1", options=""]
+|===
+
+| image:img/L1_IMG.png[,480]
+
+|===
+
+Aus Usability Sicht hat die Lösung den Vorteil das Lotterielos Teilnehmer ein Ticket kaufen können und das die Ziehung
+an einen vordefinierten Zeitpunkt stattfindet. Dies entspricht dem wie aktuellen Lotterielos Verfahren funktionieren.
+
+Der grosse Nachteil liegt auf der Hand. Was mit dem Smart Contract unter anderem bezwecken will, ist die Anzahl der
+Vertragspartner auf ein Minimum zu reduzieren und Dritte ausklammert. Ausserdem übergibt man die Kontrolle
+vom Lotterielos an den externen Service.
+
+Aus Sicht eines Angreifers ist dieses Konzept sehr interessant, er muss nur noch den externen Oracle Service angreifen um N
+Smart Contracts zu blockieren. Wenn die Smart Contracts keine Redundanz eingebaut haben. Ist ein System Ausfall auf seiten
+des Oracle Service Anbieter mit einem Spiel Unterbruch oder sogar Abbruch gleichzusetzen.
+
+==== L2 - User Adressen und Block Daten
+Ein andere Variante wäre auf externe Service zu verzichten und die Zufallszahl anhand von Teilnehmern Adressen
+und zukünftigen Blockchain Block Meta Daten zu erzeugen. Das bedeutet das bis zu Ende der Lotterielos Teilnahme, Teilnehmer ihr
+Lotterielos kaufen und danach auf den nächsten Blockchain Block Generierung warten und dessen Block
+Hash und Difficulty mit dem Teilnehmer Adressen als Input Quellen für den Zufallszahlgenerator verwendet.
+
+[cols="^1", options=""]
+|===
+
+| image:img/L2_IMG.png[,480]
+
+|===
+
+Interessant an dieser Lösung ist das dies ohne fremde Quellen auskommt und die Nachvollziehbarkeit gewährleistet wird. Jedoch
+ist es theoretisch möglich das der Miner welche die Blocks erstellt diese Verlosung manipulieren kann. Denn er kann
+den Block Hash beeinflussen.
+
+==== L3 - Commitment-Verfahren
+In dieser Variante gibt es aus Sicht vom Teilnehmer zwei Phasen. In der ersten Phase erstellt der Teilnehmer eine Zufallszahl und
+berechnet den Hash Wert davon. Dieser Wert wird dem Smart Contract übermittelt. In der zweiten Phase, wenn die Teilnahme am Lotterielos Verfahren
+zu Ende ist. Senden die Teilnehmer ihre erzeugte Zufallszahl am Smart Contract, dieser erzeugt den Hashwert davon und überprüft
+diese mit übermittelten Hashwert aus der ersten Phase. Wenn diese Stimmen werden anhand die Zufallszahl XOR verknüpft
+und dient als Zufallszahl fürs festlegen des Gewinners.
+
+[cols="^1", options=""]
+|===
+
+| image:img/L3_IMG.png[,500]
+
+|===
+
+Interessante an dieser Variante ist die Selbstbestimmung und Nachvollziehbarkeit der Zufallszahl. Die Smart Contract
+Akteure beschränkt sich auf die Lotterielos Teilnehmer. Es werden auch keine externe Blockchain Block Daten bezogen
+welche theoretisch von Blockchain Miners beeinflusst werden könnten. Jedoch liegt die Knacknuss in der zweiten Phase,
+ein Teilnehmer könnte die zweite Phase blockieren, indem es nicht teilnehmen würde. Somit wäre das Spiel einer
+Denial of Service unterstellt.
+
+Man könnte einen Finanziellen Anreiz erschaffen, so das Benutzer motiviert wären and der Zweite Phase teilzunehmen und/oder bei
+einer bestimmten Anzahl Block Generierung die eingereichten Zufallszahlen verwenden. Hier stellt sich die Frage, ob
+das aus rechtlichen Sichten verhebt. Dies müsste man in einer nachfolgende Arbeit in Erfahrung bringen.
+
+=== Entscheid
+Grundsätzlich müsste man anhand eines Bewertungskatalog und einem Scoring Model die Lösungsvarianten bewerten. Weil
+dies aber den Rahmen dieser Semesterarbeit sprengen würde. Beruht die folgende Argumentation auf die subjektive
+Sicht des Autors.
+
+Weil die Lösungsvariante L1 nicht den Smart Contract Philosophien entsprechen und die Kontrolle vom Spiel dem
+externen Oracle übergeben wird. Stellt sich die Frage, für was man ein Blockchain basierter Smart Contract benötigt.
+Wäre es nicht einfacher und sinnvoller auf eine konventionelle Applikation Architektur zu setzen.
+Würde man diese Variante trotzdem verfolgen, stellt sich die Frage wie mit der Single Point of Failure Problematik umgegangen
+wird. Die logische Schlussfolgerung wäre einbeziehen von N verschieden externen Oracles,
+anderweitig würde der Ausfall eines Oracle das Lotterielos Spiel blockieren.
+
+Die Lösungsvarianten L2 und L3 haben ihre Vor- und Nachteile. Aus Sicht von Usability punktet die L3 weil es weniger User
+Interaktion benötigt. Aus Sicht der sicheren Zufälligkeit punktet die L3 Variante. Weil aber die L3 auf einfacher
+Weise einer DOS Attacken unterstellt ist, benötigt ihr ein Konzept. Aus Sicht vom Autor ist die sichere Zufälligkeit
+mit der Lösungsvariante L2 gegeben. Aus diesem Grund wurde die Variante L2 in einem Prototyp umgesetzt.
+
+=== Prototyp
+Für die Umsetzung der Lösungsvariante L2 wurde eine Web Applikation basierend auf React einer Single Page Architektur
+aufgebaut, welches mit Hilfe der JavaScript web3.js Bibliothek an die Blockchain kommuniziert. Während der Entwicklung
+wurde mit Hilfe der Truffle Suite die Ethereum Blockchain simuliert. Das folgende Architektur Diagram zeigt die
+Abhängigkeiten der Komponenten auf. Der Source Code vom PoC wurde auf GitHub gestellt: https://github.com/0r1t0m/cas-bida-term-paper
+
+[cols="^1", options=""]
+|===
+
+| image:img/L2_ARCH.png[,480]
+
+|===
+
+=== Zufallszahl Generator
+Die Zufallszahl basiert auf den Hashwert aller Adressen und dem zukünftigen generierten Blockchain Block Hashwert.
+
+[source]
+----
+function random() private view returns (uint8) {
+    bytes memory addresses = abi.encodePacked(buyers);
+    bytes32 blockHash = blockhash(block.number - 1);
+    uint difficulty = block.difficulty;
+    bytes memory value = encode(blockHash, difficulty, addresses);
+    uint ticketCount = tickets.length;
+    return uint8(uint256(keccak256(bytes(value))) % ticketCount);
+}
+----
+
+<<<
+
+=== Production-Ready?
+Grundsätzlich kann man diese Frage mit Nein beantworten.
+Denn der PoC dürfte nach schweizer Recht nicht Produktiv aufgeschaltet werden, siehe
+Kapitel "Lotterie". Aber es wäre denkbar dies unter dem Mantel von Swisslos durchzuführen. Dies bedingt das Swisslos
+an einer solchen Partnerschaft einwilligt.
+
+Abgesehen davon müsste man den Smart Contract Code einer statischen Code Analyse und Security Audit unterziehen.
+Es bräuchte auch ein Operativen Konzept im Fall eines Hot Fixes. Wahrscheinlich wäre es sinnvoll, nach jeder Durchführung
+den Smart Contract zu destroyen und wieder zu deployen, so wäre man aus operativ Sicht vorbereit, eine revidierte Version
+vom Smart Contract zu deployen.

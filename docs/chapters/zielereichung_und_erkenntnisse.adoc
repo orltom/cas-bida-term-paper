@@ -1,0 +1,19 @@
+== Zielerreichung
+Die im Kapitel “Aufgabenstellung” definierten Ziele wurden grundsätzlich umgesetzt. Es wurden mehrer Lösungsvarianten
+ausgearbeitet, wobei die am Anfang angedachte Variante, welche externen Oracle einbezieht, als schlechtester Abschnitt.
+Aus diesem Grund wurde der optionaler Punkt ZO1 bewusst nicht umgesetzt. In einer nachfolgende Arbeit, müssten die
+Lösungsvarianten in Detail ausgearbeitet werden und einer Risiko Bewertungs Analyse unterzogen werden.
+
+== Erkenntnisse
+An dieser Stelle wird nochmals über allgemeine Erkenntnisse reflektiert, welche dem Autor während
+dieser Arbeit aufgefallen sind.
+
+* In Solidity können eigene Typen mit Hilfe von struct erstellt werden. Will man diesen spezifischen Typ nach aussen propagieren.
+Ist man gezwungen die interne Struktur wieder in Solidity Default Type herunterzubrechen.
+* Verglichen zu anderen Entwicklungsumgebung befindet sich Ethereum Smart Contract Umgebung noch im Anfangs Zustand.
+* Die Integration mit der JavaScript Bibliothek web3.js und einer Single Page Application Javascript Framework
+ist harzig und fehleranfällig.
+* Mit der Solidity Funktion blockhash(..) kann man nur auf die letzten 256 Blockchain Blöcke zugreifen, was bedeutet,
+dass in der Smart Contract Logik man darauf vorbereit sein muss, nicht auf den gewünschten Block zuzugreifen zu können.
+* Zustände eines Smart Contract sind für jedermann ablesbar. Im Fall von sensitiven Daten wäre eine Public-Key-Verschlüsselungsverfahren
+wünschenswert. Weder die Programmiersprache Solidity noch die Ethereum Smart Contract Adresse bietet diese Möglichkeit an.

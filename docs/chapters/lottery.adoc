@@ -1,0 +1,28 @@
+== Lotterie
+Die Lotterie ist ein Glückspiel wo der Gewinner per Zufall entscheiden wird. Das bedeutet, dass Gewinn oder Verlust
+von einem Losverfahren abhängen. Es gibt verschiedene Arten von Lotterien, zu den bekanntesten gehören Tombola und Lotto.
+Mit dem Kauf von Losen besitzt man Teilnahmescheine an einem Losverfahren.
+
+Veranstaltungen von Lotterie sind in der Schweiz der Comlot unterstellt. Sie unterscheiden zwischen Grosslotterien und
+Kleinlotterien, wobei Kleinlotterien weder automatisiert noch interkantonal noch online durchgeführt
+werden dürfen. Gemäss interkantonalem Recht dürfen Grosslotterien nur durch die Swisslos durchgeführt werden.
+
+Seit Anfangs 2019 ist es ausländischen Anbietern nicht möglich Online-Glücksspiele in der Schweiz anzubieten.
+Die Regierung blockiert Webseiten aller internationalen Betreiber, die nicht zu den landbasierten Casinos gehören.
+Diese erhalten wiederum ein exklusives Anrecht auf eine Online-Lizenz.
+
+[,Comlot]
+""
+In der Schweiz dürfen nur die Swisslos und die Loterie Romande im Internet Lotterien und
+Sportwetten durchführen. Alle anderen Angebote sind illegal. Die Comlot lässt deren Zugang zum Schweizer
+Markt durch die Internet Service Provider sperren.
+""
+
+Gemäss Art. 106 Abs. 6 BV müssen Reineträge aus Lotterien müssen vollumfänglich gemeinnützigen Zwecken zukommen.
+
+[,Bundesverfassung der Schweizerischen Eidgenossenschaft, Art. 106 Abs. 6 BV]
+""
+Die Kantone stellen sicher, dass die Reinerträge aus den Spielen gemäss Absatz 3 Buchstaben a und b
+vollumfänglich für gemeinnützige Zwecke, namentlich in den Bereichen Kultur, Soziales und Sport, verwendet werden.
+""
+

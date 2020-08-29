@@ -1,0 +1,156 @@
+== Technische Grundlagen
+
+=== Blockchain
+Blockchain hat seinen Ursprung in der darauf aufbauende dezentrale Kryptowährung Bitcoin. Das Konzept samt der
+Technologie wurde im Whitepaper "Bitcoin: A Peer-to-Peer Electronic Cash System" im November 2008 unter dem Pseudonym
+Satoshi Nakamoto über eine verschlüsselte E-Mail-Adresse veröffentlicht <<bw>>.
+
+Im Whitepaper wird der problematische Umgang mit monetären Werten thematisiert. Den zentralen Institutionen, wie unter anderem Banken, Versicherungen
+oder Regierungen, wird im Umgang mit monetären Werten ein Vertrauensmissbrauch vorgeworfen. Um einem Vertrauensmissbrauch
+auf einer systematische Ebene vorzubeugen, wurde die Bitcoin Blockchain Technologie entworfen. Das im Sinne von Satoshi
+Nakamoto ein vollkommen und transparentes Ökosystem im internationalem Handeln ermöglichen soll.
+
+Im grossen und ganzem kann die Blockchain als öffentliches digitales unveränderbares Transaktion Logbuch betrachtet
+werden, dass von einem dezentralen System verwaltet und genutzt wird. Transaktionen werden in der Blockchain als
+Block abgelegt. Jeder neue Block referenziert den vorherigen Block, wodurch sich eine lineare und
+chronologische Abfolge von Blöcken ergibt.
+
+Für die Verknüpfung innerhalb eines Blockes und der Block Kette wird das Merkle Tree Konzept angewendet.
+Merkle Tree ist ein Hash Baum in dem jeder Datenblock und jeder Blattknoten mit dem Hash eines Datenblocks
+und jeder Nicht-Blattknoten mit dem kryptografischen Hash der Labels seiner Kind Knoten beschriftet ist.
+Dieses Verfahren wird genutzt um Konsistenzprüfung, Datenverifizierung und Datensynchronisation bei grossen Mengen
+an Daten zu gewährleisten. Im Fall der Blockchain wird für jede Transaktion innerhalb eines Blockes ein Hash erstellt und
+gemäss Merkle Tree verknüpft und mit dem vorherigem Block Hash gehasht.
+
+Fürs Verständnis dieser Semesterarbeit ist es essentiell folgende Blockchain Charakteristiken zu kennen:
+
+[cols="3,10", options=""]
+|===
+
+| Unveränderbarkeit
+| Die Blockchain Traktionskette ist unveränderbar. Wird ein Block in die Kette hinzugefügt, kann dies nicht mehr modifiziert oder entfernt werden.
+
+| Dezentral
+| Die Blockchain ist ein verteiltes Netzwerk, welches eine direkte Interaktion der Teilnehmer ermöglicht und ein offenes System darstellt.
+
+| Integrität
+| Mit kryptografischen Algorithmen wird die Konsistenz der Kette gewährleistet.
+
+| Validität
+| Jeder Block und seine abgebildete Transaktionen werden vom Netzwerk validiert. Erst dann synchronisieren die Nodes die
+aktualisierte Block Kette.
+
+|===
+
+==== Hashfunktion
+Eine Hashfunktion ist eine Funktion, die eine Zeichenfolge beliebiger Länge auf eine Zeichenfolge mit fester Länge,
+dem sogenannten Hashwert, abbildet. Zu einem identischen Text ist der Hashwert nämlich immer gleich.
+[source]
+----
+SHA-256("CAS BIDA 2018") ==>
+fc2b453db660aeb5112797142a67247a899b2e8d3d2f56c1db46dc71ce51e6ca
+----
+Wie in vorherigen Kapiteln erwähnt wurde, sind Hashwerte essentielle Bestandteil um Integrität und Validierung eines
+Blockes und der Kette zu gewährleisten. Es gibt kein De-facto Standard bei Kryptografische Hashfunktion, aber zurzeit wird
+im Blockchain Umfeld die SHA-256 Hashfunktion verwendet.
+
+==== Konsens Mechanismen
+In einem dezentralen System wie der Blockchain gibt es nicht eine einzige Autorität, die für Recht und Ordnung sorgt,
+stattdessen vertraut man auf Konsens Mechanismen. Unter einem Konsens Mechanismus versteht man die Vorgehensweise,
+durch die eine Gruppe eine Entscheidung herbeiführt. Somit können sich fremde Teilnehmer in einem autoritären Netzwerk
+einigen.
+
+Auf der Blockchain will man mit einem Konsens Mechanismus den double spending Effekt verhindern. Ein Benutzer soll nicht
+in der Lage sein, denselben Token mehrfach ausgeben zu können. Sonst wäre der Token respektive die Blockchain Währung einer
+Inflation unterlegen.
+
+===== Proof of Work
+Der Proof of Work ist der bekannteste Konsens Mechanismus, welches vom Satoshi Nakamoto im Bitcoin Whitepaper erwähnt wurde.
+Hier eine kurze und knackige Beschreibung:
+
+[, Hristian Hristov, BlackSeaChain Konferenz]
+""
+A piece of data which is difficult (costly, time-consuming) to produce but easy for others to verify and
+which satisfies certain requirements. Producing a proof of work can be a random process with a low probability so
+that a lot of trial and error is required on average before a valid proof of work is generated.
+""
+
+Wenn ein Benutzer eine Transaktion durchführt, muss das Netzwerk sicherstellen, dass der Benutzer der die Tokens
+transferieren will auch besitzt und das die Transaktion mit seiner digitalen Signatur unterzeichnet wurde.
+Der Prozess ist als Schlürfen (engl. Mining) bekannt.
+
+Um einen neuen Block an Transaktionen erstellen zu können, müssen die Miner ein Hash Puzzle lösen. Das Puzzle beinhaltet
+unter anderem den Merkle Tree, den Hash vom vorherigen Blockes und einen zufälligen Nonce.
+Aus diesen Daten wird ein Hash erzeugt welche mit der Lösungsvorgabe, dem Difficulty Level, entsprechen muss. Der
+berechnete Hash dient als Identifikationsnummer vom erzeugten Block, welche wiederum für die Berechnung des
+Hash-Puzzles des nächsten Blockes verwendet wird. <<crr>>
+
+Um das Netzwerk aufrechtzuerhalten, bedient sich der Proof of Work Mechanismus zweier finanzieller Vergütungen:
+Der Erlös aus dem Mining und Transaktionskosten. Dem ersten Miner, der das Hash Puzzle
+löst, kann neue Tokens generieren und die Transaktionsgebühren beanspruchen.
+
+===== Proof of Stake
+Im Gegensatz zum Proof of Work kommt der Proof of Stake ohne dem Zeit- und Energieintensiven Mining aus.
+Wie die folgende Proof of Stack Beschreibung besagt, ist die Wahrscheinlichkeit einer Entlohnung direkt proportional
+zu dem Anteil an Coins, die ein User besitzt, geteilt durch die Gesamtmenge an Coins welche im Umlauf sind <<pos>>:
+
+[, James Ray, Ethereum Proof of Stake FAQ]
+""
+In PoS-based public blockchains (e.g. Ethereum's upcoming Casper implementation), a set of validators take
+turns proposing and voting on the next block, and the weight of each validator's vote depends on the
+size of its deposit (i.e. stake).
+""
+
+Es existieren mehrere Variationen des Proof of Stake Prinzips, wie zum Beispiel Leased Proof of Stake
+und Delegated Proof of Stake. Beide Mechanismen führen zu ähnlichen Resultaten, doch nur „Proof-of-Work“ führt zu
+einer negativen Externalität. Die Blockchain Währungen mit der grössten Marktkapitaliserung beruhen auf den
+Proof of Work Konsens Mechanismus, wollen aber im Laufe dies und kommenden Jahres von Proof of Work zu
+Delegated Proof of Stake wechseln.
+
+==== Smart Contract
+Den Begriff Smart Contract wurde vom Nick Szabo 1996 definiert, er beschreibt es als computerbasierendes
+Transaktionsprotokoll, dass die Bedingungen eines Vertrages beinhaltet <<szabo>>. In diesem Kontext sind
+Smart Contract ein Konzept das auf der Blockchain Technologie aufbaut <<ew>>.
+
+Im Wesentlichen lässt sich der Smart Contract in drei integrale Bestandteile unterteilen. Der erste Bestandteil
+besteht aus den Signaturen
+von N nutzende Smart Contract Parteien. Die ihr Einverständnis oder Ablehnung der Vertragsbedingungen mit
+ihren digitalen Signaturen erklären. Der nächste Bestandteil ist der Gegenstand der Vereinbarung. Dies etwas
+was nur im Umfeld des Smart Contracts existiert. Der letzte und dritte Bestandteil sind die Bedingungen.
+Dazu gehören die Anforderungen, Regeln, Belohnungen und Strafen, die mit diesen Vertrag verbunden sind.
+
+Befürworter von Smart Contracts erhoffen sich von der Technologie eine Erleichterung von Geschäftsvorgängen und
+Vertragsabwicklungen sowie eine höhere Vertragssicherheit. Grundsätzlich lässt sich jede Form von Kauf- oder Mietvertrag
+über ein Smart Contract auf der Blockchain abwickeln. In der Theorie ist es schneller, billiger und effizienter, weil
+die bürokratische Verwaltungsstruktur eingespart werden kann und Dritte, die bisher für die Sicherheit der Vertragspartner
+bürgten überflüssig werden würden.
+
+==== Ethereum
+Ethereum gehört zur zweiten Generation der Blockchain Technologie und wurde vom Vitalik Buterin 2013
+im Whitepaper "Ethereum: A Next Generation Smart Contract & Decentralized Application Platform“ <<ew>> vorgestellt und
+2014 im Yellow Paper von Gavin Wood ausgearbeitet. Im Juli 2015 startete der Betrieb von Ethereum.
+
+Ethereum basiert auch auf der Blockchain Technologie, wobei es sich im Gegensatz zum Bitcoin nicht primär
+um eine Kryptowährung handelt. Es ist primär eine dezentralisierte Plattform für Distributed Apps (DApps), die auf
+der Blockchain Technologie basiert. Verteilte Nodes führen dabei Smart Contracts aus, die ihrerseits die Integrität der
+Güter und die Bezahlung in der Kryptowährung Ether sicherstellen. Der Token Ether ist ein Mittel zum Zweck.
+
+Beim Abarbeiten der Blockchain Transaktionen, werden die Zustände der Ethereum Accounts verändert. Diese Zustände werden
+von allen Nodes berechnet und abgeglichen. Es gibt zwei Arten von Ethereum Accounts, die normalen Accounts und die
+Contract Accounts. Beide verwalten Ether Beträge, beim Contract Account kommt noch der Smart Contract Code hinzu.
+
+Für Überweisungen von Beträgen wird eine entsprechende Message erstellt und signiert und als
+Block Transaction verschickt. Im Falle der Normalen Accounts bedeutet der Empfang und Versand von solchen
+Messages Überweisungen von Ether Beträgen. Wobei es auch komplexere Messages existieren.
+Wird von einem Normalen Account aus, eine Create Transaction Message erstellt und an einem weiteren normalen Account gesendet.
+Wird aus der Ziel Adresse ein Contract Account. Mit nachfolgenden Messages kann der Smart Contract Code aktiviert und getriggert werden.
+
+Smart Contract können auf verschiedensten Weise entwickelt werden. Von Online Diensten bis zu lokalen Entwicklungsumgebungen
+ist alles vorhanden. Die Ethereum Smart Contracts werden in der Programmiersprache Solidity geschrieben und später mit Hilfe
+eines Compilers zu Byte Code kompiliert. Nach der Kompilierung werden die Smart Contract auf einer Ethereum Virtual Machine
+deployed indem es an eine Ethereum Contract Adresse versendet wird.
+
+Dort werden sie dann auf einer Ethereum Virtual Machine ausgeführt, welches quasi eine Turing vollständige Maschine ist.
+Die Ausführung des Smart Contract ist durch das Gas begrenzt. Jede Funktion hat einen zugewiesenen Gas-Wert,
+welches den Ressourcenverbrauch wiederspiegelt. Im Smart Contract kann auch eine Gas Limite festgelegt werden, die einem
+vor einem unerwarteten Hohen Verbrauch schützen soll.

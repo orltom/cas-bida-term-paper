@@ -1,0 +1,8 @@
+[appendix]
+web3.js Provider
+----------------
+
+```
+include::../../web/src/utils/getWeb3.js[]
+
+```

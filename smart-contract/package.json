@@ -1,0 +1,17 @@
+{
+  "name": "truffle-async-await-tests",
+  "version": "0.1.0",
+  "description": "Examples of using async await with Truffle tests",
+  "scripts": {
+    "clean": "rm -rf build",
+    "build": "truffle compile",
+    "test": "truffle test",
+    "migrate": "truffle migrate --reset"
+  },
+  "dependencies": {
+    "ganache-cli": "^6.3.0",
+    "package.json": "^2.0.1",
+    "web3": "^1.0.0-beta.46"
+  },
+  "license": "MIT"
+}

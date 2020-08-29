@@ -1,0 +1,18 @@
+:doctype: book
+:Author: Orlando Tomás
+:Email: orlando.tomas@zhaw.ch
+:Date: 2019-04-04
+:Revision: 1.0
+:pdf-style: custom-theme.yml
+:pdf-stylesdir: themes
+:icons: font
+:title-logo-image: image:img/zhaw.jpg[zhaw,200,200,float="right",align="right"]
+:toc: left
+:toc-title: Inhaltsverzeichnis
+:toclevels: 2
+:stem:
+
+CAS BIDA 2018 Semesterarbeit: Lotterie als Smart Contract
+=========================================================
+{author} {email}
+{revision}, {date}

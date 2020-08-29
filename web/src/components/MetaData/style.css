@@ -1,0 +1,19 @@
+.state-initialize {
+    color: #007bff!important;
+    font-weight: bold;
+}
+
+.state-running {
+    color: #28a745!important;
+    font-weight: bold;
+}
+
+.state-sold-out {
+    color: #dc833f !important;
+    font-weight: bold;
+}
+
+.state-finished {
+    color: #dc3545!important;
+    font-weight: bold;
+}

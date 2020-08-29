@@ -1,0 +1,33 @@
+:doctype: book
+:Author: Orlando Tomás
+:Email: orlando.tomas@zhaw.ch
+:Date: 2019-04-04
+:Revision: 1.0
+:pdf-style: custom-theme.yml
+:pdf-stylesdir: themes
+:icons: font
+:title-logo-image: image:img/zhaw.jpg[zhaw,200,200,float="right",align="right"]
+:toc: left
+:toc-title: Inhaltsverzeichnis
+:toclevels: 2
+:stem:
+
+
+include::chapters/aufgabenstellung.adoc[]
+include::chapters/methodik.adoc[]
+include::chapters/technische_grundlagen.adoc[]
+
+include::chapters/lottery.adoc[]
+
+include::chapters/poc.adoc[]
+
+include::chapters/zielereichung_und_erkenntnisse.adoc[]
+
+[bibliography]
+include::chapters/literaturverzeichnisse.adoc[]
+
+
+[appendix]
+include::appendix/smart_contract.adoc[]
+include::appendix/web_entry_point.adoc[]
+include::appendix/web3js_provider.adoc[]
